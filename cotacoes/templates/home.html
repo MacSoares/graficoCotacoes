@@ -6,11 +6,8 @@
 </head>
 <body>
   <div id="container"></div>
-  {{eur}}
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/series-label.js"></script>
-  <script src="https://code.highcharts.com/modules/exporting.js"></script>
-  <script src="https://code.highcharts.com/modules/export-data.js"></script>
   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
   <script>
     Highcharts.chart('container', {
@@ -24,9 +21,22 @@
         },
 
         xAxis: {
-            accessibility: {
-                rangeDescription: 'Date Range'
-            }
+            type: "datetime",
+            range: 5 * 24 * 3600,// five days range, 
+        },
+
+        rangeSelector: {
+            enabled: true,
+            buttons: [{
+                type: 'day',
+                count: 5,
+                text: '5day',
+                events: {
+                    click: function () {
+                        console.log(this);
+                    }
+                }
+            }]
         },
 
         legend: {
@@ -40,7 +50,8 @@
                 label: {
                     connectorAllowed: false
                 },
-                pointStart: 2010
+                pointStart: Date.UTC(2022,0,1),
+                pointInterval: 24 * 3600 * 1000 // one day
             }
         },
 

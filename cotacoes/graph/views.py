@@ -5,20 +5,23 @@ from graph.models import Currency
 
 def home(request):
     dataset = Currency.objects.all().order_by('base_date')
-    eur = list()
+    # currency = {}
+    # for line in dataset:
+    #     currency[f"{str(line.base_date.date())}"] = {
+    #         "eur": str(line.eur),
+    #         "brl": str(line.brl),
+    #         "jpy": str(line.jpy),
+    #     }
+
     base_date = list()
-    jpy = list()
+    eur = list()
     brl = list()
-
+    jpy = list()
     for line in dataset:
-        eur.append(line.eur)
         base_date.append(line.base_date.date())
-        jpy.append(line.jpy)
-        brl.append(line.brl)
+        eur.append(float(line.eur))
+        brl.append(float(line.brl))
+        jpy.append(float(line.jpy))
 
-    return render(request, 'home.html', {
-        'eur': eur,
-        'brl': brl,
-        'jpy': jpy,
-        'base_date': base_date,
-    })
+    data = {"base_date": base_date, "eur": eur, "brl": brl, "jpy": jpy}
+    return render(request, 'home.html', data)
