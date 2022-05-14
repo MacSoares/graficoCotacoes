@@ -22,7 +22,7 @@
 
         xAxis: {
             type: "datetime",
-            range: 5 * 24 * 3600,// five days range, 
+            range: 5*24*3600,
         },
 
         rangeSelector: {
@@ -30,7 +30,7 @@
             buttons: [{
                 type: 'day',
                 count: 5,
-                text: '5day',
+                text: 'day',
                 events: {
                     click: function () {
                         console.log(this);
@@ -50,8 +50,8 @@
                 label: {
                     connectorAllowed: false
                 },
-                pointStart: Date.UTC(2022,0,1),
-                pointInterval: 24 * 3600 * 1000 // one day
+                pointStart: Date.UTC({{base_date.2.year}}, 0, 1),
+                pointInterval: 24 * 3600 * 1000 
             }
         },
 
@@ -66,20 +66,6 @@
             data: {{jpy}}
         }],
 
-        responsive: {
-            rules: [{
-                condition: {
-                    maxWidth: 500
-                },
-                chartOptions: {
-                    legend: {
-                        layout: 'horizontal',
-                        align: 'center',
-                        verticalAlign: 'bottom'
-                    }
-                }
-            }]
-        }
 
     });
   </script>
