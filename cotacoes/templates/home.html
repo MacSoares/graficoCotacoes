@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Django Currency on Highcharts</title>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script>
+    Highcharts.chart('container', {
+        title: {
+        text: 'Currency view'
+        },
+        yAxis: {
+            title: {
+                text: 'Value based on USD'
+            }
+        },
+
+        xAxis: {
+            type: "datetime",
+            range: 5*24*3600,
+        },
+
+        rangeSelector: {
+            enabled: true,
+            buttons: [{
+                type: 'day',
+                count: 5,
+                text: 'day',
+                events: {
+                    click: function () {
+                        console.log(this);
+                    }
+                }
+            }]
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: Date.UTC({{base_date.2.year}}, 0, 1),
+                pointInterval: 24 * 3600 * 1000 
+            }
+        },
+
+        series: [{
+            name: 'EUR',
+            data: {{eur}}
+        }, {
+            name: 'BRL',
+            data: {{brl}}
+        }, {
+            name: 'JPY',
+            data: {{jpy}}
+        }],
+
+
+    });
+  </script>
+</body>
+</html>
