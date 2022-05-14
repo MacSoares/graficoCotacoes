@@ -37,9 +37,10 @@ class Command(BaseCommand):
             usd = rates["USD"]
             eur = rates["EUR"]
             jpy = rates["JPY"]
+            brl = rates["BRL"]
 
             Currency.objects.update_or_create(
-                usd=usd, eur=eur, jpy=jpy, base_date=base_date)
+                usd=usd, eur=eur, jpy=jpy, brl=brl, base_date=base_date)
             date_control = date_control + timedelta(days=1)
 
         self.stdout.write(
